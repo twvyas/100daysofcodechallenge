@@ -1,0 +1,61 @@
+Day7-Use of Operators
+
+->Objective: Given the meal price (base cost of a meal), tip percent (the percentage of the meal price being added as tip), and tax percent (the percentage of the meal price being added as tax) for a meal, 
+find and print the meal's total cost. Round the result to the nearest integer.
+
+->Constraints: double mealCost: the cost of food before tip and tax
+int tipPercent: the tip percentage
+int taxPercent: the tax percentage
+round totalCost to the nearest integer and print the result
+
+->Sample Input: 12.00
+                20
+                8
+              
+->Sample Output: 15
+
+Code:
+
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        double mealCost=sc.nextDouble();
+        int tipPercent=sc.nextInt();
+        int taxPercent=sc.nextInt();
+        sc.close();
+        
+        double tip=mealCost*tipPercent/100;
+        double tax=mealCost*taxPercent/100;
+        
+        int totalCost=(int)Math.round(mealCost+tax+tip);
+        System.out.println(totalCost);
+        
+    }
+}
+
+->Test Case 1: 
+
+Input (stdin)
+12.00
+20
+8
+Output (stdout)
+15
+
+->Test Case 2:
+
+Input (stdin)
+15.50
+15
+10
+Output (stdout)
+19
