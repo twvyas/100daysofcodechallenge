@@ -1,0 +1,61 @@
+Topic : Insertion in Empty Circular Linked List 
+
+Insertion in Empty List:
+
+Initially, when the list is empty, the last pointer will be NULL.
+After inserting node temp,
+After insertion, temp is the last node, so the pointer last points to node temp. And Node temp is the first and the last node, so temp points to itself. 
+
+
+Code:
+
+public class CLL_InsertionInEmptyList {
+    static class Node{
+        int data;
+        Node next;
+    };
+
+    static Node addToEmpty(Node last, int data)         //  function for empty list
+{
+
+    if (last != null)
+        return last;
+ 
+    Node temp = new Node();     // Creating a node
+ 
+    temp.data = data;       // Assigning the data
+    last = temp;
+    
+    temp.next = last;       // list was empty, so link single node to itself.
+ 
+    return last;
+}
+ 
+        static void traverse(Node last)
+        {
+            Node p; //if list is empty
+            if(last==null)
+            {
+                System.out.println("List is empty.");
+                return;
+            }
+
+            p=last.next; //Traversing the list
+
+            do{
+                System.out.println(p.data+" ");
+                p=p.next;
+            }
+            while(p!=last.next);
+        }
+        public static void main(String args[])
+        {
+            Node last=null;
+            last=addToEmpty(last,66);
+            traverse(last);     //function call
+        }      
+}
+
+OutPut:
+66
+
