@@ -7,7 +7,6 @@ Make temp -> next = last -> next
 last -> next = temp
 
 Time complexity: O(1) 
-Auxiliary Space: O(1)
 
 public class CLL_InsertingAtTheBeginning {
     static class Node {
