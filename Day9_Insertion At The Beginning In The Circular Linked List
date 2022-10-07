@@ -1,0 +1,70 @@
+Topic : Insertion at beginning in the Circular linked List
+
+To insert a node at the beginning of the list, follow these steps: 
+
+Firstly create a node temp,
+Make temp -> next = last -> next
+last -> next = temp
+
+Time complexity: O(1) 
+Auxiliary Space: O(1)
+
+public class CLL_InsertingAtTheBeginning {
+    static class Node {
+        int data;
+        Node next;
+    };
+    static Node addToEmpty(Node last, int data)
+    {
+        if (last != null)
+            return last;
+        
+        Node temp = new Node();         // Creating a node dynamically
+       
+        temp.data = data;            // Assigning the data.
+        last = temp;
+        
+        last.next = last;           // Creating the link.
+        return last;
+    }
+   
+    static Node addBegin(Node last, int data)
+    {
+        if (last == null)
+            return addToEmpty(last, data);
+       
+        Node temp = new Node();
+        temp.data = data;
+        temp.next = last.next;
+        last.next = temp;
+        return last;
+    }
+    static void traverse(Node last)
+    {
+        Node p;
+
+        if (last == null) {                          // If list is empty, return.
+            System.out.println("List is empty.");
+            return;
+        }
+        p = last.next;                            // Pointing to first Node of the list.
+        
+        do {                                       // Traversing the list.
+            System.out.print(p.data + " ");
+            p = p.next;
+        } while (p != last.next);
+    }
+   
+    public static void main(String[] args)
+    {
+        Node last = null;
+        last = addToEmpty(last, 96);
+        last = addBegin(last, 49);
+        last = addBegin(last, 22);
+        traverse(last);
+    }
+}
+
+
+    
+
