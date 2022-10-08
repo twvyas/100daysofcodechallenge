@@ -1,0 +1,73 @@
+Topic : Insertion at the end of the Circular Linked list
+
+ For insertion at the end, the whole list has to be traversed. If instead of the start pointer, we take a pointer to the last node
+ then there won’t be any need to traverse the whole list. So insertion at the end takes constant time, irrespective of the length of the list.
+
+To insert a node at the end of the circular linked list;
+
+Create a node, say temp
+Make temp -> next = last -> next
+last -> next = temp
+last = temp
+
+
+public class CLL_InsertionAtEnd {
+    static class Node{
+        int data;
+        Node next;
+    };
+
+    static Node addToEmpty(Node last, int data)
+    {
+        if(last!=null)      //function onlt for empty list
+            return last;
+
+            Node temp=new Node();   //creating node
+            temp.data=data;
+            last=temp;
+            last.next=last;
+            return last;
+    }
+
+        static Node addEnd(Node last, int data)
+        {
+            if(last==null)
+                return addToEmpty(last, data);
+
+            Node temp=new Node();
+            temp.data=data;
+            temp.next=last.next;
+            last.next=temp;
+            last=temp;
+            return last;
+        }
+
+            static void traverse(Node last)
+            {
+                Node p;
+
+                if(last==null){
+                    System.out.println("List is empty");
+                    return;
+                }
+                p=last.next;        //pointing to first node of the list
+
+                do{
+                    System.out.println(p.data + " ");
+                    p=p.next;
+                }while(p!=last.next);
+            }
+            public static void main(String args[])
+            {
+                Node last = null;
+                last = addToEmpty(last, 100);
+                last = addEnd(last, 200);
+                last = addEnd(last, 300);
+                traverse(last);
+            }
+}
+
+Output:
+100
+200
+300
