@@ -1,0 +1,96 @@
+Topic : Insertion in between the nodes in the circular linked list
+
+To insert a node in between the two nodes;
+
+Create a node, say temp. 
+Search for the node after which temp needs to be inserted, say that node is P. 
+Make temp -> next = P -> next; 
+P -> next = temp.
+
+Code:
+
+public class CLL_InsertionInBetweenNodes {
+    static class Node{
+        int data;
+        Node next;
+    };
+
+    static Node addToEmpty(Node last, int data)
+    {
+        if(last!=null)
+            return last;
+            
+            Node temp=new Node();
+            temp.data=data;
+            last=temp;
+            last.next=last;
+            return last;
+    }
+
+    static Node addAfter(Node last, int data, int item)
+    {
+        if(last==null)
+            return null;
+
+        Node temp,p;
+        p=last.next;
+
+        do{
+            if(p.data==item){
+                temp=new Node();
+                temp.data=data;
+                temp.next=p.next;
+                p.next=temp;
+                if(p==last)
+                    last=temp;
+                return last;
+            }
+            p=p.next;
+        }while(p!=last.next);
+        System.out.println(item+"not present in the list.");
+        return last;
+    }
+    static void traverse(Node last)
+    {
+        Node p;
+        if(last==null){
+            System.out.println("List is empty");
+            return;
+        }
+        p=last.next;
+
+        do{
+            System.out.println(p.data+" ");
+            p=p.next;
+        }while(p!=last.next);
+    }
+    
+    public static void main(String args[]){     //Driver Code
+        Node last=null;
+        last=addToEmpty(last, 200);
+        
+        last=addAfter(last, 100, 200);
+        traverse(last);
+    }
+}
+
+Test Case 1:
+Output : 
+200
+100
+
+Test Case 2:
+If i change code like this in the Driver Code like this
+   public static void main(String args[]){
+        Node last=null;
+        last=addToEmpty(last, 1000);
+        
+        last=addAfter(last, 100, 200);
+        traverse(last);
+    }
+    
+ Then Output will be like this:
+ 200not present in the list.
+ 1000 
+ 
+
