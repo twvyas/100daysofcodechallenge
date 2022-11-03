@@ -1,0 +1,91 @@
+/*
+ Topic : Postfix to Prefix Conversion
+ Postfix: An expression is called the postfix expression if the operator appears in the expression after the operands. Simply of the form (operand1 operand2 operator). 
+ Example : AB+CD-* (Infix : (A+B) * (C-D) )
+
+ Prefix : An expression is called the prefix expression if the operator appears in the expression before the operands. Simply of the form (operator operand1 operand2). 
+ Example : *+AB-CD (Infix : (A+B) * (C-D) )
+ 
+ Algorithm for Postfix to Prefix:
+
+> Read the Postfix expression from left to right
+> If the symbol is an operand, then push it onto the Stack
+> If the symbol is an operator, then pop two operands from the Stack 
+> Create a string by concatenating the two operands and the operator before them. 
+  string = operator + operand2 + operand1 
+> And push the resultant string back to Stack
+> Repeat the above steps until end of Postfix expression.
+
+*/
+
+//Code
+// Java Program to convert postfix to prefix
+import java.util.*;
+public class PostfixToPrefix {
+    // function to check if character
+    // is operator or not
+    static boolean isOperator(char x)
+    {
+ 
+        switch (x) {
+        case '+':
+        case '-':
+        case '/':
+        case '*':
+            return true;
+        }
+        return false;
+    }
+
+     // Convert postfix to Prefix expression
+     static String postTopre(String post_exp)
+     {
+        Stack<String> s=new Stack<String>();
+
+        //length of expression
+        int length=post_exp.length();
+
+        //reading from left to right
+        for(int i=0;i<length;i++){
+
+            //check if symbol is operator
+            if(isOperator(post_exp.charAt(i))){
+
+                // pop two operands from stack
+                String op1=s.peek();
+                s.pop();
+
+                String op2=s.peek();
+                s.pop();
+
+                //concat the operands and operator
+                String temp=post_exp.charAt(i)+op2+op1;
+
+                //push string temp back to stack
+                s.push(temp);
+            }
+
+            //if symbol is operand 
+            else{
+                //push the operand to the stack
+                s.push(post_exp.charAt(i)+"");
+            }
+        }
+        // concatenate all strings in stack and return the answer
+        String answer="";
+        for(String i:s)
+            answer+=i;
+        return answer;
+    }
+    public static void main(String args[]){
+        String post_exp="ABC/-AK/L-*";
+        System.out.println("Prefix: "+postTopre(post_exp));
+    }
+}
+
+/*
+Output:
+Prefix: *-A/BC-/AKL
+PS C:\Users\lenovo\Desktop\java folder> 
+*/
+
