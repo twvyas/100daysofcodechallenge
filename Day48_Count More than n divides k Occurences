@@ -1,0 +1,73 @@
+Topic : Count More than n/k Occurences
+Problem : 
+//{ Driver Code Starts
+/*package whatever //do not write package name here */
+
+import java.io.*;
+import java.util.*;
+
+class Driverclass {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = sc.nextInt();
+            }
+            int k = sc.nextInt();
+
+            System.out.println(new Solution().countOccurence(arr, n, k));
+        }
+    }
+}
+
+// } Driver Code Ends
+
+
+class Solution 
+{
+    //Function to find all elements in array that appear more than n/k times.
+    public int countOccurence(int[] arr, int n, int k) 
+    {
+        // your code here,return the answer
+                int c=n/k;
+        int count=0;
+        int[] freq=new int[100005];
+        for(int i=0;i<n;i++){
+            freq[arr[i]]++;
+            if(freq[arr[i]]>1){
+                arr[i]=-1;
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(arr[i]>0){
+                if(freq[arr[i]]>c){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+Test Case 1:
+For Input: 
+8
+3 1 2 2 1 2 3 3
+4
+Your Output: 
+2
+Expected Output: 
+2
+
+Test Case 2:
+For Input: 
+5
+3 1 2 2 1 
+3
+Your Output: 
+2
+Expected Output: 
+2
