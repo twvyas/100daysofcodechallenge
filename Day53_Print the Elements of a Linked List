@@ -1,0 +1,181 @@
+Topic : Print the Elements of a Linked List
+Problem : 
+This is an to practice traversing a linked list. Given a pointer to the head node of a linked list, print each node's data element, one per line. If the head pointer is null (indicating the list is empty), there is nothing to print.
+
+Function Description
+
+Complete the printLinkedList function in the editor below.
+
+printLinkedList has the following parameter(s):
+
+SinglyLinkedListNode head: a reference to the head of the list
+Print
+
+For each node, print its data value on a new line (console.log in Javascript).
+Input Format
+
+The first line of input contains n, the number of elements in the linked list.
+The next n lines contain one element each, the data values for each node.
+
+Note: Do not read any input from stdin/console. Complete the printLinkedList function in the editor below.
+
+Sample Input
+
+2
+16
+13
+Sample Output
+
+16
+13
+Explanation
+
+There are two elements in the linked list. They are represented as 16 -> 13 -> NULL. So, the printLinkedList function should print 16 and 13 each on a new line.
+
+//Code
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static class SinglyLinkedListNode {
+        public int data;
+        public SinglyLinkedListNode next;
+
+        public SinglyLinkedListNode(int nodeData) {
+            this.data = nodeData;
+            this.next = null;
+        }
+    }
+
+    static class SinglyLinkedList {
+        public SinglyLinkedListNode head;
+        public SinglyLinkedListNode tail;
+
+        public SinglyLinkedList() {
+            this.head = null;
+            this.tail = null;
+        }
+
+        public void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
+
+            if (this.head == null) {
+                this.head = node;
+            } else {
+                this.tail.next = node;
+            }
+
+            this.tail = node;
+        }
+    }
+
+    // Complete the printLinkedList function below.
+
+    /*
+     * For your reference:
+     *
+     * SinglyLinkedListNode {
+     *     int data;
+     *     SinglyLinkedListNode next;
+     * }
+     *
+     */
+    static void printLinkedList(SinglyLinkedListNode head) {
+
+        while(true){
+            System.out.println(head.data);
+            if(head.next != null){
+                head = head.next;
+            }else{
+                break;
+            }
+        }
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        SinglyLinkedList llist = new SinglyLinkedList();
+
+        int llistCount = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < llistCount; i++) {
+            int llistItem = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            llist.insertNode(llistItem);
+        }
+
+        printLinkedList(llist.head);
+
+        scanner.close();
+    }
+}
+
+Test Case 1:
+Input 
+4
+17
+19
+5
+12
+Your Output 
+17
+19
+5
+12
+
+Test Case 2:
+Input 
+
+49
+36
+97
+46
+27
+60
+78
+63
+16
+8
+4
+52
+28
+82
+11
+98
+23
+84
+7
+18{-truncated-}
+
+Expected Output
+
+36
+97
+46
+27
+60
+78
+63
+16
+8
+4
+52
+28
+82
+11
+98
+23
+84
+7
+18
+52{-truncated-}
