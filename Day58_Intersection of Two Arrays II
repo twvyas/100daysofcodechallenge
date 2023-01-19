@@ -1,0 +1,120 @@
+Topic : Intersection of Two Arrays II
+Problem :
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+Example 1:
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2,2]  
+
+Example 2:
+Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+Output: [4,9]
+Explanation: [9,4] is also accepted.
+ 
+Constraints:
+1 <= nums1.length, nums2.length <= 1000
+0 <= nums1[i], nums2[i] <= 1000
+ 
+Follow up:
+What if the given array is already sorted? How would you optimize your algorithm?
+What if nums1's size is small compared to nums2's size? Which algorithm is better?
+What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+
+Code:
+(Two-Pointers Approach):
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        // Sort both the arrays first...
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        // Create an array list...
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        // Use two pointers i and j for the two arrays and initialize both with zero.
+        int i = 0, j = 0;
+        while(i < nums1.length && j < nums2.length){
+            // If nums1[i] is less than nums2[j]...
+            // Leave the smaller element and go to next(greater) element in nums1...
+            if(nums1[i] < nums2[j]) {
+                i++;
+            }
+            // If nums1[i] is greater than nums2[j]...
+            // Go to next(greater) element in nums2 array...
+            else if(nums1[i] > nums2[j]){
+                j++;
+            }
+            // If both the elements intersected...
+            // Add this element to arr & increment both i and j.
+            else{
+                arr.add(nums1[i]);
+                i++;
+                j++;
+            }
+        }
+        // Create a output list to store the output...
+        int[] output = new int[arr.size()];
+        int k = 0;
+        while(k < arr.size()){
+            output[k] = arr.get(k);
+            k++;
+        }
+        return output;
+    }
+}
+
+(Using HashMap)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer>map=new HashMap<Integer,Integer>();
+        ArrayList<Integer> ans = new ArrayList<>();
+          
+            
+            for(int i:nums1){
+                if(map.containsKey(i)){
+                    map.put(i, map.get(i)+1);
+                }
+                else{
+                    map.put(i,1);
+                }
+            }
+            
+            for(int i:nums2){
+                if(map.containsKey(i)&&map.get(i)>0){
+                map.put(i, map.get(i) - 1);
+                     ans.add(i);
+                       
+                }
+            }
+        
+        
+        int [] arr = new int[ans.size()];
+
+        for(int i=0;i<arr.length;i++){
+            arr[i]= ans.get(i);
+        }
+     
+        return arr;
+        
+    }
+}
+
+Case 1:
+Input
+nums1 =
+[1,2,2,1]
+nums2 =
+[2,2]
+Output
+[2,2]
+Expected
+[2,2]
+
+Case 2:
+Input
+nums1 =
+[4,9,5]
+nums2 =
+[9,4,9,8,4]
+Output
+[4,9]
+Expected
+[4,9]
