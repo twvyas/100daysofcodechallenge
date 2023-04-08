@@ -20,3 +20,16 @@ class SpecialLeft{
         specialChar(str);
 }
 }
+
+//OUTPUT -1
+//Enter String 
+  //&^helo-o-wo-rld&6 
+  
+  //&^---&helooworld6
+
+
+//OUTPUT -2
+//Enter String 
+  //hi--*howru&   
+  
+  //--*&hihowru
